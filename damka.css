@@ -1,0 +1,229 @@
+.board{
+    display: grid;
+    width: 480px;
+    height: 480px;
+    margin: 50px auto;
+    border: 5px rgb(98, 17, 228) solid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    flex-wrap: wrap;
+}
+.brown-square{
+    width: 60px;
+    height: 60px;
+    background-color: brown;
+    -webkit-box-shadow: inset 4px 5px 50px -3px #00000086; 
+    box-shadow: inset 4px 5px 50px -3px #000000d3;
+}
+.white-square{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(237, 238, 225);
+    -webkit-box-shadow: inset 4px 5px 50px -3px #000000; 
+    box-shadow: inset 4px 5px 50px -3px #000000;
+}
+.black-pawn {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+}
+.none{
+    display: none;
+}
+.white-pawn {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(188, 149, 76);
+    border-radius: 50%;
+}
+.white-queen {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    border-radius: 50%;
+}
+.queen {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 10px;
+}
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+	background-color:#ffc477;
+	border-radius:6px;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:18px;
+	font-weight:bold;
+	padding:13px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #cc9f52;
+}
+.modal-for-draw {
+    background-color: rgba(164, 191, 43, 0.792);
+    border: 5px solid black;
+    margin: 30vh 35.5vw;
+    padding: 20px;
+    position: fixed;
+    text-align:center;
+    font-size: 25px;
+    width: 25vw;
+    height: 27vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.696);
+}
+.modal-for-game-over {
+    background-color: rgba(0, 255, 255, 0.674);
+    width: 12vw;
+    height: 10wh;
+    padding: 20px 50px;
+    border: 5px solid black;
+    margin: 35vh 41vw;
+    position: fixed;
+    font-size: 35px;
+    text-align:center;
+}
+.exist {
+    font-size: 30px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: -228px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url(//fonts.googleapis.com/css?family=Vibur);
+html,body{
+  height:100%
+}
+body {
+  background: #112 url(//images.weserv.nl/?url=i.imgur.com/6QJjYMe.jpg)  center no-repeat;
+  background-size:cover;
+  margin:0
+}
+.logo {
+  text-align: center;
+  width: 65%;
+  height: 250px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+   user-select: none;
+   z-index: -1;
+}
+
+.logo {
+  font: 400 19vh "Vibur";
+  color: #fee;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000;
+}
+.logo {
+  animation: blink linear infinite 2s;
+}
+.logo{
+  animation: blink linear infinite 3s;
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+    
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+

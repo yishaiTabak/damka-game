@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./damka.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="logo">
+    <div class="exist" id="white-headline">The White Play</div>
+    <div class="none" id="black-headline">The Black Play</div>
+    </div>
+    <div class="board" id="board">
+        <div class="none" id="draw-container">
+            <div id="draw-massage" class="modal-for-draw">
+                would you like a draw? <br>
+                <div>
+                <button id="accept" class="myButton">yes</button>
+                <button id="reject" class="myButton">no</button>
+                </div>
+            </div>
+        </div>
+        <div class="none" id="game-over-container">
+            <div class="modal-for-game-over">
+                <div id="game-over"></div>
+                <button id="OK-button" class="myButton">OK</button>
+            </div>
+        </div>
+    </div>
+    <button class="myButton" id="resign">resign</button>
+    <button  class="myButton" id="draw">draw</button>
+    <div id="draw-massage" class="none">
+        would you like a draw? <br>
+        <button id="accept" class="myButton">yes</button>
+        <button id="reject" class="myButton">no</button>
+    </div>
+    <script type="module" src="./damka.js"></script>
+</body>
+</html>
