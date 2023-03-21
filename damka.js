@@ -1,11 +1,11 @@
 import { CheckersGame } from "./checkersGameClass.js";
-
+import { Util } from "./util.js"; 
 const game = new CheckersGame(document.getElementById('board'))
 let myboard = [[], [], [], [], [], [], [], []]
 let mypawns = [[], [], [], [], [], [], [], []]
 
-CheckersGame.createBoard(mypawns, myboard)
-    
+Util.createBoard(mypawns, myboard)
+
 for(let newX = 0; newX < 8; newX++) {
     for(let newY = 0;newY < 8; newY++) {
         myboard[newX][newY].addEventListener('click',() => {
