@@ -3,38 +3,38 @@ export class Pawn {
         this.isWhite = isWhite
         this.theDiv = theDiv
     }
-    isLegalMove(originalX, originalY, newX, newY, isWhiteTurn, mypawns, thereIsAnotherCapture) {
-        if(this.isWhite !== isWhiteTurn || mypawns[newX][newY] !== null)
+    isLegalMove(locationRow, locationColumn, destinationRow, destinationColumn, isWhiteTurn, pieces, thereIsAnotherCapture) {
+        if(this.isWhite !== isWhiteTurn || pieces[destinationRow][destinationColumn] !== null)
             return false
         if(thereIsAnotherCapture)
-            return Queen.isCaptureMove(originalX, originalY, newX, newY, this.isWhite, mypawns)
+            return Queen.isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, this.isWhite, pieces)
         else
-            return this.isRegularMove(mypawns, originalX, originalY, newX, newY) || this.isCaptureMove(originalX, originalY, newX, newY, mypawns)
+            return this.isRegularMove(pieces, locationRow, locationColumn, destinationRow, destinationColumn) || this.isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, pieces)
     }
-    isRegularMove(mypawns, originalX, originalY, newX, newY) {
+    isRegularMove(pieces, locationRow, locationColumn, destinationRow, destinationColumn) {
         let positiveForBlack = this.isWhite? -1:1
-        return (mypawns[newX][newY] === null && newX - originalX === positiveForBlack && (newY - originalY === 1 || newY - originalY === -1))
+        return (pieces[destinationRow][destinationColumn] === null && destinationRow - locationRow === positiveForBlack && (destinationColumn - locationColumn === 1 || destinationColumn - locationColumn === -1))
     }
-    isCaptureMove(originalX, originalY, newX, newY, mypawns) {
-        if(mypawns[newX][newY] !== null)
+    isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, pieces) {
+        if(pieces[destinationRow][destinationColumn] !== null)
             return false
         let positiveForBlack = this.isWhite? -1:1
-        if(newX - originalX === positiveForBlack * 2 && (newY - originalY === 2 || newY - originalY === -2))
-            if(mypawns[(originalX + newX)/2][(originalY + newY)/2] != null && this.isWhite !== mypawns[(originalX + newX)/2][(originalY + newY)/2].isWhite)
+        if(destinationRow - locationRow === positiveForBlack * 2 && (destinationColumn - locationColumn === 2 || destinationColumn - locationColumn === -2))
+            if(pieces[(locationRow + destinationRow)/2][(locationColumn + destinationColumn)/2] != null && this.isWhite !== pieces[(locationRow + destinationRow)/2][(locationColumn + destinationColumn)/2].isWhite)
                 return true
         return false
     }
-    isMultipleCaptures(originalX, originalY, mypawns) {
-        for(let newX = 0; newX<8;newX++)
-            for(let newY = 0; newY<8; newY++)
-                if (Queen.isCaptureMove(originalX, originalY, newX, newY, this.isWhite, mypawns))
+    isMultipleCaptures(locationRow, locationColumn, pieces) {
+        for(let destinationRow = 0; destinationRow<8;destinationRow++)
+            for(let destinationColumn = 0; destinationColumn<8; destinationColumn++)
+                if (Queen.isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, this.isWhite, pieces))
                     return true
         return false
     }
-    itHasOptionToMove(originalX, originalY, mypawns) {
+    itHasOptionToMove(locationRow, locationColumn, pieces) {
         for(let i = 0;i<8;i++)
             for(let j = 0; j<8;j++)
-                if(this.isRegularMove(mypawns, originalX, originalY, i, j) || this.isCaptureMove(originalX, originalY, i, j, mypawns))
+                if(this.isRegularMove(pieces, locationRow, locationColumn, i, j) || this.isCaptureMove(locationRow, locationColumn, i, j, pieces))
                     return true
         return false
     }
@@ -44,16 +44,16 @@ export class Pawn {
         super(isWhite, theDiv)
         this.container = container
     }
-    static isCaptureMove(originalX, originalY, newX, newY, isWhite, mypawns) {
-        if(mypawns[newX][newY] === null && (newX - originalX === 2 || newX - originalX === -2) && (newY - originalY === 2 || newY - originalY === -2))
-            if(mypawns[(originalX + newX)/2][(originalY + newY)/2] !== null && isWhite !== mypawns[(originalX + newX)/2][(originalY + newY)/2].isWhite)
+    static isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, isWhite, pieces) {
+        if(pieces[destinationRow][destinationColumn] === null && (destinationRow - locationRow === 2 || destinationRow - locationRow === -2) && (destinationColumn - locationColumn === 2 || destinationColumn - locationColumn === -2))
+            if(pieces[(locationRow + destinationRow)/2][(locationColumn + destinationColumn)/2] !== null && isWhite !== pieces[(locationRow + destinationRow)/2][(locationColumn + destinationColumn)/2].isWhite)
                 return true
         return false
     }
-    isCaptureMove(originalX, originalY, newX, newY, mypawns) {
-        return Queen.isCaptureMove(originalX, originalY, newX, newY,this.isWhite, mypawns)
+    isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn, pieces) {
+        return Queen.isCaptureMove(locationRow, locationColumn, destinationRow, destinationColumn,this.isWhite, pieces)
     }
-    isRegularMove(mypawns, originalX, originalY, newX, newY) {
-        return (mypawns[newX][newY] === null && (newX - originalX === 1 || newX - originalX === -1) && (newY - originalY === 1 || newY - originalY === -1))
+    isRegularMove(pieces, locationRow, locationColumn, destinationRow, destinationColumn) {
+        return (pieces[destinationRow][destinationColumn] === null && (destinationRow - locationRow === 1 || destinationRow - locationRow === -1) && (destinationColumn - locationColumn === 1 || destinationColumn - locationColumn === -1))
     }
 }

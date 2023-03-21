@@ -15,6 +15,21 @@
     -webkit-box-shadow: inset 4px 5px 50px -3px #00000086; 
     box-shadow: inset 4px 5px 50px -3px #000000d3;
 }
+.green-border{
+    border: 2px green solid;
+    width: 56px;
+    height: 56px;
+    background-color: brown;
+    -webkit-box-shadow: inset 4px 5px 50px -3px #00000086; 
+    box-shadow: inset 4px 5px 50px -3px #000000d3;
+}
+.black-border{
+    width: 60px;
+    height: 60px;
+    background-color: rgba(239, 141, 141, 0.829);
+    -webkit-box-shadow: inset 4px 5px 50px -3px #00000086; 
+    box-shadow: inset 4px 5px 50px -3px #000000d3;
+}
 .white-square{
     width: 60px;
     height: 60px;
@@ -23,6 +38,7 @@
     box-shadow: inset 4px 5px 50px -3px #000000;
 }
 .black-pawn {
+    
     margin: 5px;
     width: 50px;
     height: 50px;

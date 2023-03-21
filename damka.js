@@ -1,15 +1,20 @@
 import { CheckersGame } from "./checkersGameClass.js";
 import { Util } from "./util.js"; 
-const game = new CheckersGame(document.getElementById('board'))
-let myboard = [[], [], [], [], [], [], [], []]
-let mypawns = [[], [], [], [], [], [], [], []]
+const game = new CheckersGame()
+let board = [[], [], [], [], [], [], [], []]
+let pieces = [[], [], [], [], [], [], [], []]
 
-Util.createBoard(mypawns, myboard)
+Util.createBoard(pieces, board, document.getElementById('board'))
 
-for(let newX = 0; newX < 8; newX++) {
-    for(let newY = 0;newY < 8; newY++) {
-        myboard[newX][newY].addEventListener('click',() => {
-            handleClick(game, mypawns, myboard, newX, newY)
+for(let rowIndex = 0; rowIndex < 8; rowIndex++) {
+    for(let columnIndex = 0;columnIndex < 8; columnIndex++) {
+        board[rowIndex][columnIndex].addEventListener('click',() => {
+            deleteBorders()
+            handleClick(game, pieces, board, rowIndex, columnIndex)
+            if(game.thereIsAnotherCapture) 
+                hundleBordersForLegalMoves(game.lastClick[0], game.lastClick[1])
+            else
+                hundleBordersForLegalMoves(rowIndex, columnIndex)
     })
     }
 }
@@ -38,7 +43,6 @@ drawButton.addEventListener('click', () => {
         drawContainer.className = 'none'
     })
 })
-
 resignButton.addEventListener('click', () => {
     gameOverMassage.innerHTML = 'game over! <br>' + (game.isWhiteTurn? 'black won!': 'white won!') + gameOverMassage.innerHTML
     gameOverContainer.className = 'modal-container'
@@ -46,8 +50,8 @@ resignButton.addEventListener('click', () => {
 OKButton.addEventListener('click', () => {
     location.reload()
 })
-function handleClick(game, mypawns, myboard, newX, newY) {
-    switch(game.play(mypawns,myboard,game.isWhiteTurn,game.lastClick, newX,newY)) {
+function handleClick(game, pieces, myboard, destinationRow, destinationColumn) {
+    switch(game.play(pieces,myboard,game.isWhiteTurn,game.lastClick, destinationRow,destinationColumn)) {
         case 'blackWon':
         gameOverMassage.innerHTML = "game over!<br> black won"
         gameOverContainer.className = 'modal-container'
@@ -64,5 +68,20 @@ function handleClick(game, mypawns, myboard, newX, newY) {
     else{
         whiteHeadline.className = 'none'
         blackHeadline.className = 'exist'
+    }
+}
+function deleteBorders() {
+    for(let x = 0; x<8;x++)
+        for(let y =0;y<8;y++)
+            if((x % 2 === 0 && y % 2 === 0) || x % 2 === 1 && y % 2 === 1)
+                board[x][y].className = 'brown-square'
+}
+function hundleBordersForLegalMoves(rowIndex, columnIndex){
+    if(pieces[rowIndex][columnIndex] != null && pieces[rowIndex][columnIndex].isWhite === game.isWhiteTurn) {
+        board[rowIndex][columnIndex].className = 'black-border'
+        for(let x = 0; x<8;x++)
+            for(let y =0;y<8;y++) 
+                if(pieces[rowIndex][columnIndex].isLegalMove(rowIndex, columnIndex, x, y, game.isWhiteTurn, pieces, game.thereIsAnotherCapture))
+                    board[x][y].className = 'green-border' 
     }
 }
