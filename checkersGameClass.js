@@ -115,38 +115,8 @@ hundleMove(locationRow, locationColumn, destinationRow, destinationColumn) {
     if(isSingleStep)
         this.handleMoveAndBurnedPieces(locationRow, locationColumn, destinationRow, destinationColumn)
     else
-        {
-            this.pieces = this.pieces[locationRow][locationColumn].simulationBoardForBeatenPieces
-            // let newPieces = CheckersGame.newPieces(this.pieces)
-            // this.bbb(newPieces, locationRow,locationColumn,destinationRow,destinationColumn, true)
-        }
+        this.pieces = this.pieces[locationRow][locationColumn].simulationBoardForBeatenPieces
         this.changeTurn()
         this.handleNewQueen(destinationRow, destinationColumn)
-}
-bbb(newPieces,locationRow, locationColumn,destinationRow, destinationColumn,isFirsCapture) {
-    let isTheLast = true
-    for(let indexes of [[2,2], [2,-2], [-2,2], [-2,-2]]) {
-        const newRow = locationRow + indexes[0]
-        const newColumn = locationColumn +indexes[1]
-        const isIndexesInBoard = (0 <= newRow && newRow <8 && 0 <=newColumn && newColumn <8)
-        if(isIndexesInBoard) {
-            if(isFirsCapture) {
-                 if(this.pieces[locationRow][locationColumn]&& this.pieces[locationRow][locationColumn].isCaptureMove(locationRow, locationColumn, newRow, newColumn, newPieces)) {
-                    let somePieces = CheckersGame.newPieces(newPieces)
-                    somePieces = CheckersGame.handleCaptureMove(somePieces, locationRow, locationColumn, newRow, newColumn)
-                    this.bbb(somePieces, newRow, newColumn,destinationRow, destinationColumn, false)
-                    isTheLast = false
-                }
-            }
-            else if(Queen.isCaptureMove(locationRow, locationColumn, newRow, newColumn, this.isWhiteTurn, newPieces)) {
-                    let somePieces = CheckersGame.newPieces(newPieces)
-                    somePieces = CheckersGame.handleCaptureMove(somePieces, locationRow, locationColumn, newRow, newColumn)
-                    this.bbb(somePieces, newRow, newColumn,destinationRow, destinationColumn, false)
-                    isTheLast = false
-            }
-        }
-    }
-    if(isTheLast && locationRow === destinationRow && locationColumn === destinationColumn)
-        this.pieces = newPieces
 }
 }

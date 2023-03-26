@@ -62,7 +62,6 @@ checkOptionsToCapture(newPieces,locationRow, locationColumn, destinationRow, des
         const newRow = locationRow + indexes[0]
         const newColumn = locationColumn +indexes[1]
         const isIndexesInBoard = (0 <= newRow && newRow <8 && 0 <=newColumn && newColumn <8)
-
         const handleSimulationCapture = () => {
             let somePieces = CheckersGame.newPieces(newPieces)
             somePieces = CheckersGame.handleCaptureMove(somePieces, locationRow, locationColumn, newRow, newColumn)
@@ -71,19 +70,17 @@ checkOptionsToCapture(newPieces,locationRow, locationColumn, destinationRow, des
         }
         if(isIndexesInBoard)
             if(isFirsCapture) {
-                if(this.isCaptureMove(locationRow, locationColumn, newRow, newColumn, newPieces)) {
+                if(this.isCaptureMove(locationRow, locationColumn, newRow, newColumn, newPieces)) 
                     handleSimulationCapture()
-            }
         }
-            else if(Queen.isCaptureMove(locationRow, locationColumn, newRow, newColumn, this.isWhite, newPieces)){
+            else if(Queen.isCaptureMove(locationRow, locationColumn, newRow, newColumn, this.isWhite, newPieces))
                 handleSimulationCapture()
-            }
+    }
         const isSelectedPieceDestination = locationRow === destinationRow && locationColumn === destinationColumn
         if(isTheLastCapture && isSelectedPieceDestination) {
             this.isOptionToCapture = true
             this.simulationBoardForBeatenPieces = newPieces
         }
-    }
 }
 }
 
