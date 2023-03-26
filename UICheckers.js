@@ -6,10 +6,6 @@ export class UICheckers {
         this.board = [[], [], [], [], [], [], [], []]
         }
     renderUi() { 
-        // let game = new CheckersGame();
-        // let board = [[], [], [], [], [], [], [], []]
-        // let pieces = [[], [], [], [], [], [], [], []]
-        //Util.createBoard(this.pieces, this.board, document.getElementById('board'))
         this.initBoard()
         this.showPieces(this.game.pieces)
         for(let rowIndex = 0; rowIndex < 8; rowIndex++) 
@@ -17,10 +13,7 @@ export class UICheckers {
                 this.board[rowIndex][columnIndex].addEventListener('click',() => {
                 this.deleteBorders()
                 this.handleClick(rowIndex, columnIndex)
-                if(this.game.thereIsAnotherCapture) 
-                    this.hundleBordersForLegalMoves(this.game.lastClick[0], this.game.lastClick[1])
-                else
-                    this.hundleBordersForLegalMoves(rowIndex, columnIndex)
+                this.hundleBordersForLegalMoves(rowIndex, columnIndex)
             })
             this.hundleButtons()
     }
@@ -43,20 +36,14 @@ export class UICheckers {
     promotePawnToQueen(vizualPawn) {
         const imgOfQueen = document.createElement('img')
         imgOfQueen.className = 'queen'
-        
         vizualPawn.appendChild(imgOfQueen)
     }
     initBoard() {
         for(let x = 0; x < 8; x++)
             for(let y = 0;y < 8; y++) {
                 this.board[x][y] = document.createElement('div')
-                
-
-                ////
-                if((x % 2 === 0 && y % 2 === 0) || x % 2 === 1 && y % 2 === 1) 
-                    this.board[x][y].className = 'brown-square'
-                else
-                    this.board[x][y].className = 'white-square'
+                const isBrownSquare = (x % 2 === 0 && y % 2 === 0) || (x % 2 === 1 && y % 2 === 1)
+                    this.board[x][y].className = isBrownSquare? 'brown-square':'white-square'
                 board.appendChild(this.board[x][y])
             }
     }
@@ -67,12 +54,13 @@ export class UICheckers {
                     this.board[x][y].className = 'brown-square'
     }
     hundleBordersForLegalMoves(locationRow, locationColumn){
-        const isLocationEmpty = this.game.pieces[locationRow][locationColumn] == null
-        if(!isLocationEmpty && this.game.pieces[locationRow][locationColumn].isWhite === this.game.isWhiteTurn) {
+        const selectedPiece = this.game.pieces[locationRow][locationColumn]
+        const isLocationEmpty = selectedPiece == null
+        if(!isLocationEmpty && selectedPiece.isWhite === this.game.isWhiteTurn) {
             this.board[locationRow][locationColumn].className = 'shadow-square'
             for(let x = 0; x<8;x++)
                 for(let y =0;y<8;y++) 
-                    if(this.game.pieces[locationRow][locationColumn].isLegalMove(locationRow, locationColumn, x, y, this.game.isWhiteTurn, this.game.pieces))
+                    if(selectedPiece.isLegalMove(locationRow, locationColumn, x, y, this.game.isWhiteTurn, this.game.pieces))
                         this.board[x][y].className = 'green-border' 
         }
     }
@@ -95,14 +83,10 @@ export class UICheckers {
     hundleHeadline() {
         const whiteHeadline = document.getElementById('white-headline')
         const blackHeadline = document.getElementById('black-headline')
-        if(this.game.isWhiteTurn){
-            blackHeadline.className = 'none'
-            whiteHeadline.className = 'exist'
-        }
-        else{
-            whiteHeadline.className = 'none'
-            blackHeadline.className = 'exist'
-        }
+        const visibleHeadline = this.game.isWhiteTurn? whiteHeadline:blackHeadline
+        const unvisibleHeadline = !this.game.isWhiteTurn? whiteHeadline:blackHeadline
+        visibleHeadline.className = 'exist'
+        unvisibleHeadline.className = 'none'
     }
     hundleDrawButton(gameOverMassage, gameOverContainer){
         const drawContainer = document.getElementById('draw-container')
