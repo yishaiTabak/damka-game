@@ -1,0 +1,13 @@
+.none {
+    display: none;
+}
+.red {
+    color: red;
+}
+.upper-bo {
+    width: 700px;
+    height: 500px;
+    border: black solid 5px;
+    margin: 100px auto;
+    padding: 30px;
+}
